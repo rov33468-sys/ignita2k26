@@ -13,6 +13,7 @@ import PageTransition from "@/components/PageTransition";
 import ParticleField from "@/components/ParticleField";
 import AnimatedBlobs from "@/components/AnimatedBlobs";
 import ScrollProgress from "@/components/ScrollProgress";
+import { FAQHeroScene } from "@/components/FAQHeroScene";
 
 const faqs = [
   {
@@ -80,10 +81,10 @@ const faqs = [
 const categories = ["All Files", "General", "Registration", "Events", "Logistics"];
 
 const categoryColors: Record<string, string> = {
-  "General": "190 95% 60%", // Cyan
-  "Registration": "280 85% 65%", // Purple
-  "Events": "15 90% 60%", // Orange
-  "Logistics": "140 70% 50%", // Green
+  "General": "280 85% 65%", // Purple
+  "Registration": "45 100% 50%", // Gold
+  "Events": "270 70% 40%", // Deep Violet
+  "Logistics": "285 100% 85%", // White/Purple accent
   "All Files": "0 0% 80%", // Default Gray
 };
 
@@ -129,14 +130,14 @@ const FAQ = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-background scanline-overlay relative">
+      <div className="min-h-screen bg-background scanline-overlay relative overflow-x-hidden">
         <ParticleField />
         <AnimatedBlobs />
         <ScrollProgress />
         <Navbar />
 
         {/* Data Core Header */}
-        <section className="relative pt-28 pb-12 flex items-center justify-center min-h-[40vh]">
+        <section className="relative pt-28 pb-8 flex items-center justify-center z-20">
           <div className="container mx-auto px-4 text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -148,23 +149,23 @@ const FAQ = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="flex items-center gap-2 text-[10px] md:text-xs text-primary uppercase tracking-[0.4em] mb-4 font-semibold font-mono"
+                className="flex items-center gap-2 text-[10px] md:text-xs text-[#ffd700] uppercase tracking-[0.4em] mb-4 font-semibold font-mono"
               >
-                <Database size={14} className="text-primary" /> KNOWLEDGE BASE
+                <Database size={14} className="text-[#ffd700]" /> KNOWLEDGE BASE
               </motion.div>
 
               <div className="relative inline-block mb-3 px-4 sm:px-6">
                 {/* Futuristic Cyber brackets */}
-                <div className="absolute left-0 -top-2 w-3 h-3 border-t-2 border-l-2 border-primary/50" />
-                <div className="absolute right-0 -top-2 w-3 h-3 border-t-2 border-r-2 border-primary/50" />
-                <div className="absolute left-0 -bottom-2 w-3 h-3 border-b-2 border-l-2 border-primary/50" />
-                <div className="absolute right-0 -bottom-2 w-3 h-3 border-b-2 border-r-2 border-primary/50" />
+                <div className="absolute left-0 -top-2 w-3 h-3 border-t-2 border-l-2 border-[#9333ea]/50" />
+                <div className="absolute right-0 -top-2 w-3 h-3 border-t-2 border-r-2 border-[#9333ea]/50" />
+                <div className="absolute left-0 -bottom-2 w-3 h-3 border-b-2 border-l-2 border-[#9333ea]/50" />
+                <div className="absolute right-0 -bottom-2 w-3 h-3 border-b-2 border-r-2 border-[#9333ea]/50" />
 
                 <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-wider uppercase mb-0">
                   <span className="text-white/40 font-light mr-3 sm:mr-4 select-none">
                     DATA
                   </span>
-                  <span className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(249,115,22,0.4)] animate-pulse">
+                  <span className="bg-gradient-to-r from-[#ffd700] via-[#9333ea] to-[#e9d5ff] bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(255,215,0,0.4)] animate-pulse">
                     CORE
                   </span>
                 </h1>
@@ -182,36 +183,87 @@ const FAQ = () => {
           </div>
         </section>
 
-        <section className="section-padding pt-0 relative z-10">
-          <div className="container mx-auto max-w-4xl">
-            
-            {/* Terminal Interface Container */}
-            <div className="bg-[#0C0C0C] border border-[#333] rounded-sm p-4 sm:p-6 mb-8 shadow-2xl font-mono text-[#CCCCCC] relative overflow-hidden">
-              
-              {/* Windows CMD Header */}
-              <div className="mb-6 text-xs sm:text-sm text-[#CCCCCC]/90">
-                <p>IGNITIA Data Core [Version 2026.1.0]</p>
-                <p>&copy; 2026 IGNITIA &apos;26. All rights reserved.</p>
-              </div>
+        {/* Hero Interactive Area: Terminal Box + 3 Rays + 3D Model */}
+        <section className="relative z-20 w-full mb-16 mt-4 overflow-visible flex justify-center">
+          <div className="container max-w-5xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-0">
 
-              {/* CLI Active Search Bar */}
-              <div className="relative mb-2 flex flex-col sm:flex-row sm:items-center text-xs sm:text-sm">
-                <span className="text-[#CCCCCC] mr-2 whitespace-nowrap mb-1 sm:mb-0">C:\ IGNITIA \ FAQ_SEARCH_BAR &gt;</span>
-                <div className="flex-1 relative flex items-center">
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full bg-transparent border-none outline-none text-[#CCCCCC] font-mono focus:ring-0 p-0"
-                    spellCheck="false"
-                  />
-                  {/* Blinking cursor fallback for visual flair when typing */}
-                  {searchQuery === "" && (
-                    <span className="absolute left-0 w-2 h-4 bg-[#CCCCCC] animate-pulse pointer-events-none" />
-                  )}
+            {/* Left Side: Terminal Box */}
+            <div className="relative w-full lg:w-[600px] z-10 shrink-0">
+
+              {/* Glowing Neon Border Wrapper matching the image */}
+              <div className="relative p-[2px] rounded-xl bg-gradient-to-r from-cyan-400 via-purple-500 to-red-500 shadow-[10px_0_40px_-10px_rgba(239,68,68,0.5)]">
+                <div className="bg-[#0b0614] rounded-[10px] p-5 sm:p-6 h-full relative overflow-hidden group font-mono text-[#CCCCCC]">
+
+                  {/* Windows CMD Header */}
+                  <div className="mb-4 text-xs sm:text-sm text-[#CCCCCC]/90 relative z-10">
+                    <p className="text-[#ffd700]/80">IGNITIA Data Core [Version 2026.1.0]</p>
+                    <p>&copy; 2026 IGNITIA &apos;26. POWER LEVEL: MAXIMUM.</p>
+                  </div>
+
+                  {/* CLI Active Search Bar */}
+                  <div className="relative flex flex-col sm:flex-row sm:items-center text-xs sm:text-sm z-10">
+                    <span className="text-[#9333ea] font-bold mr-2 whitespace-nowrap mb-1 sm:mb-0">C:\ IGNITIA \ FAQ_SEARCH_BAR &gt;</span>
+                    <div className="flex-1 relative flex items-center">
+                      <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full bg-transparent border-none outline-none text-[#ffffff] font-mono focus:ring-0 p-0 shadow-none placeholder:text-gray-600"
+                        placeholder="Enter query..."
+                        spellCheck="false"
+                      />
+                      {/* Blinking cursor fallback for visual flair when typing */}
+                      {searchQuery === "" && (
+                        <span className="absolute left-0 w-2 h-4 bg-[#ffd700] animate-pulse pointer-events-none" />
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
+
+              {/* The 3 Connecting Rays (SVG) - Attached exactly to the right edge */}
+              <div className="absolute left-[100%] top-0 w-[150px] lg:w-[260px] h-full pointer-events-none z-[16] hidden lg:block">
+                <svg className="w-full h-full overflow-visible" style={{ position: 'absolute' }}>
+                  <defs>
+                    <filter id="ray-glow" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                      <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+
+                  {/* Top Ray (Golden) */}
+                  <line x1="0" y1="0" x2="100%" y2="-80" stroke="#ffd700" strokeWidth="3" filter="url(#ray-glow)" />
+                  <circle cx="0" cy="0" r="4" fill="#ffd700" filter="url(#ray-glow)" />
+
+                  {/* Middle Ray (White) */}
+                  <line x1="0" y1="50%" x2="100%" y2="-80" stroke="#ffffff" strokeWidth="3" filter="url(#ray-glow)" />
+                  <circle cx="0" cy="50%" r="4" fill="#ffffff" filter="url(#ray-glow)" />
+
+                  {/* Bottom Ray (Red) */}
+                  <line x1="0" y1="100%" x2="100%" y2="-80" stroke="#ef4444" strokeWidth="3" filter="url(#ray-glow)" />
+                  <circle cx="0" cy="100%" r="4" fill="#ef4444" filter="url(#ray-glow)" />
+
+                  {/* Wand Convergence Dot */}
+                  <circle cx="100%" cy="-80" r="6" fill="#ffffff" filter="url(#ray-glow)" />
+                </svg>
+              </div>
+
             </div>
+
+            {/* Right Side: 3D Model - Reverted to absolute positioning as requested */}
+            <div className="absolute -right-[5.5rem] lg:-right-[10.5rem] -top-[32vh] lg:-top-[62vh] w-[300px] h-[450px] lg:w-[450px] lg:h-[650px] z-[15] pointer-events-none">
+              <FAQHeroScene />
+            </div>
+
+          </div>
+        </section>
+
+        {/* Central Content Area: Categories & FAQ Accordion */}
+        <section className="section-padding pt-0 relative z-20">
+          <div className="container mx-auto max-w-3xl px-4">
 
             {/* Category Filter Toggles */}
             <div className="flex justify-center mb-10 w-full overflow-x-auto pb-4 hide-scrollbar">
@@ -227,20 +279,19 @@ const FAQ = () => {
                     <button
                       key={cat}
                       onClick={() => setActiveCategory(cat)}
-                      className={`relative px-4 sm:px-6 py-2.5 text-[10px] sm:text-xs font-semibold uppercase tracking-wider rounded-full transition-colors z-10 ${
-                        isActive ? "text-white" : "text-muted-foreground hover:text-white"
-                      }`}
+                      className={`relative px-4 sm:px-6 py-2.5 text-[10px] sm:text-xs font-semibold uppercase tracking-wider rounded-full transition-colors z-10 ${isActive ? "text-white" : "text-muted-foreground hover:text-white"
+                        }`}
                     >
                       {isActive && (
                         <motion.div
                           layoutId="faq-category-toggle"
                           className="absolute inset-0 rounded-full z-[-1]"
                           style={{
-                            background: isActive && cat === "All Files" 
-                              ? `linear-gradient(to right, #f97316, #dc2626)` 
+                            background: isActive && cat === "All Files"
+                              ? `linear-gradient(to right, #ffd700, #9333ea)`
                               : `linear-gradient(135deg, hsl(${color}), hsl(${color} / 0.6))`,
-                            boxShadow: isActive && cat === "All Files" 
-                              ? `0 0 15px rgba(249,115,22,0.4)`
+                            boxShadow: isActive && cat === "All Files"
+                              ? `0 0 15px rgba(147,51,234,0.4)`
                               : `0 0 15px hsl(${color} / 0.4)`
                           }}
                           transition={{ type: "spring", stiffness: 400, damping: 30 }}
@@ -288,21 +339,21 @@ const FAQ = () => {
                           >
                             <AccordionTrigger className="hover:no-underline py-4 sm:py-6 px-4 transition-colors">
                               <div className="flex items-center text-left gap-4 w-full">
-                                <Terminal 
-                                  size={18} 
+                                <Terminal
+                                  size={18}
                                   style={{ color: isActive ? `hsl(${color})` : "inherit" }}
-                                  className={`${isActive ? "" : "text-muted-foreground group-hover:text-white"}`} 
+                                  className={`${isActive ? "" : "text-muted-foreground group-hover:text-[#ffd700]"}`}
                                 />
                                 <div className="flex flex-col gap-1">
-                                  <span 
+                                  <span
                                     className="text-[10px] font-mono uppercase tracking-widest flex items-center gap-2"
                                     style={{ color: isActive ? `hsl(${color})` : "rgba(255,255,255,0.4)" }}
                                   >
-                                    {faq.id} 
+                                    {faq.id}
                                     <span className="w-1 h-1 rounded-full" style={{ backgroundColor: `hsl(${color})` }}></span>
                                     {faq.category}
                                   </span>
-                                  <span 
+                                  <span
                                     className="font-heading text-sm sm:text-base font-semibold"
                                     style={{ color: isActive ? `hsl(${color})` : "white" }}
                                   >
@@ -312,7 +363,7 @@ const FAQ = () => {
                               </div>
                             </AccordionTrigger>
                             <AccordionContent className="px-4 pb-6 pt-2">
-                              <div 
+                              <div
                                 className="pl-8 sm:pl-10 border-l ml-2"
                                 style={{ borderColor: `hsl(${color} / 0.2)` }}
                               >
@@ -336,7 +387,7 @@ const FAQ = () => {
                     animate={{ opacity: 1 }}
                     className="flex flex-col items-center justify-center py-20 text-center border border-white/5 rounded-xl bg-black/20"
                   >
-                    <Terminal size={48} className="text-white/20 mb-4" />
+                    <Terminal size={48} className="text-[#9333ea]/40 mb-4" />
                     <p className="text-white font-mono text-lg font-bold">NO RECORDS FOUND</p>
                     <p className="text-muted-foreground text-sm mt-2 font-mono">Check spelling or try a broader query.</p>
                   </motion.div>
@@ -345,30 +396,30 @@ const FAQ = () => {
             </div>
 
             {/* Support / Contact Section */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative bg-black/40 border border-primary/30 rounded-lg p-8 sm:p-12 backdrop-blur-xl shadow-[0_0_30px_rgba(249,115,22,0.15)] text-center mt-12 overflow-hidden group"
+              className="relative bg-black/40 border border-[#9333ea]/30 rounded-lg p-8 sm:p-12 backdrop-blur-xl shadow-[0_0_30px_rgba(147,51,234,0.15)] text-center mt-12 overflow-hidden group"
             >
               {/* Cyber UI Details */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-50" />
-              <div className="absolute top-4 left-4 w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <div className="absolute bottom-4 right-4 text-[10px] text-primary/40 font-mono">SYS_STATUS: ONLINE</div>
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#ffd700]/50 to-transparent opacity-50" />
+              <div className="absolute top-4 left-4 w-2 h-2 rounded-full bg-[#ffd700] animate-pulse" />
+              <div className="absolute bottom-4 right-4 text-[10px] text-[#9333ea]/60 font-mono">SYS_STATUS: ONLINE</div>
 
-              <Terminal size={32} className="mx-auto text-primary mb-4 opacity-80" />
-              
-              <h2 className="font-mono text-xl sm:text-2xl font-bold mb-4 uppercase tracking-[0.2em] text-primary drop-shadow-[0_0_8px_rgba(249,115,22,0.6)]">
+              <Terminal size={32} className="mx-auto text-[#ffd700] mb-4 opacity-80" />
+
+              <h2 className="font-mono text-xl sm:text-2xl font-bold mb-4 uppercase tracking-[0.2em] text-[#9333ea] drop-shadow-[0_0_8px_rgba(147,51,234,0.6)]">
                 &gt; SYSTEM QUERY UNRESOLVED?
               </h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-sm sm:text-base leading-relaxed font-mono">
                 If the databanks lack the required intelligence, establish a direct link with central command. We are monitoring all comms channels.
               </p>
-              <a 
+              <a
                 href="https://mail.google.com/mail/?view=cm&fs=1&to=support@ignitia.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 rounded-sm border border-primary bg-primary/10 text-primary font-mono font-bold hover:bg-primary hover:text-black hover:scale-105 hover:shadow-[0_0_20px_rgba(249,115,22,0.6)] transition-all duration-300 uppercase tracking-[0.1em] text-sm"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-sm border border-[#9333ea] bg-[#9333ea]/10 text-[#ffd700] font-mono font-bold hover:bg-[#9333ea] hover:text-black hover:scale-105 hover:shadow-[0_0_20px_rgba(255,215,0,0.6)] transition-all duration-300 uppercase tracking-[0.1em] text-sm"
               >
                 INITIATE COMMS LINK
               </a>
